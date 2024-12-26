@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Admin\Views\User\Upsert.cshtml" />
+    <Content Remove="wwwroot\js\Script.js" />
+    <Content Remove="wwwroot\js\shiper.js" />
+    <Content Remove="wwwroot\js\shipment.js" />
+    <Content Remove="wwwroot\js\User.js" />
+    <Content Remove="wwwroot\js\userpdfs.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.102.3" />
+    <PackageReference Include="EPPlus" Version="7.2.2" />
+    <PackageReference Include="itext7" Version="8.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="8.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="PDFsharp" Version="6.1.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.7.0" />
+    <PackageReference Include="Syncfusion.Pdf.Net.Core" Version="26.2.8" />
+    <PackageReference Include="Syncfusion.XlsIORenderer.Net.Core" Version="26.2.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DemoWebsite.DataAccess\DemoWebsite.DataAccess.csproj" />
+    <ProjectReference Include="..\DemoWebsite.Models\DemoWebsite.Models.csproj" />
+    <ProjectReference Include="..\DemoWebsite.Utility\DemoWebsite.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\User\Upsert.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\User\Upsert.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\Script.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\shipment.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\User\Upsert.cshtml" />
+    <None Include="wwwroot\js\Script.js" />
+    <None Include="wwwroot\js\shiper.js" />
+    <None Include="wwwroot\js\userpdfs.js" />
+    <None Include="wwwroot\js\user.js" />
+    <None Include="wwwroot\js\shipment.js" />
+  </ItemGroup>
+
+</Project>

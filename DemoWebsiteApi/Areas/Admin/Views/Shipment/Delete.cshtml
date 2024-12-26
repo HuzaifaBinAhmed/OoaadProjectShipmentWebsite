@@ -1,0 +1,52 @@
+﻿@model DemoWebsiteApi.Models.Shipment
+
+<div class="container">
+    <h2>Delete Shipment</h2>
+
+    <form method="post">
+        <input asp-for="ShipmentId" hidden />
+
+        <div class="mb-3">
+            <label for="ConsigneeName" class="form-label">Consignee Name</label>
+            <input type="text" id="ConsigneeName" class="form-control" disabled asp-for="ConsigneeName" placeholder="Consignee Name" />
+        </div>
+
+        <div class="mb-3">
+            <label for="PhoneNumber" class="form-label">Phone Number</label>
+            <input type="text" id="PhoneNumber" class="form-control" disabled asp-for="PhoneNumber" placeholder="Phone Number" />
+        </div>
+
+        <div class="mb-3">
+            <label for="Address" class="form-label">Address</label>
+            <input type="text" id="Address" class="form-control" disabled asp-for="Address" placeholder="Address" />
+        </div>
+
+        <div class="mb-3">
+            <label for="City" class="form-label">City</label>
+            <input type="text" id="City" class="form-control" disabled asp-for="City" placeholder="City" />
+        </div>
+
+        <div class="mb-3">
+            <label for="CODAmount" class="form-label">COD Amount</label>
+            <input type="number" id="CODAmount" class="form-control" disabled asp-for="CODAmount" placeholder="COD Amount" />
+        </div>
+
+        <div class="mb-3">
+            <label for="Netweight" class="form-label">Net Weight</label>
+            <input type="text" id="Netweight" class="form-control" disabled asp-for="Netweight" placeholder="Net Weight" />
+        </div>
+
+        <div class="mb-3">
+            <label for="SpecialInstructions" class="form-label">Special Instructions</label>
+            <input type="text" id="SpecialInstructions" class="form-control" disabled asp-for="SpecialInstructions" placeholder="Special Instructions" />
+        </div>
+
+        <div class="mb-3">
+            <label for="ApplicationUserId" class="form-label">Sender</label>
+            <input type="text" id="ApplicationUserId" class="form-control" disabled asp-for="ApplicationUserId" placeholder="Sender" />
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">Delete</button>
+        <a class="btn btn-danger" asp-controller="Shipment" asp-action="Index">Back to List</a>
+    </form>
+</div>

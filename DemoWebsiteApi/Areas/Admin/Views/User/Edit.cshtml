@@ -1,0 +1,133 @@
+﻿@using DemoWebsiteApi.Utility
+@model RoleManagementVM
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Update User - DemoWebsiteApi</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-5F2JKoCpSxP3ixw8F9FzO3ZC/6A77RYTzv4mRQgaRQZQ1/yZxXHctb8iR2M4r9O" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4C+6ypt4J3D5+gZlZ9Qs7JdfbRymYP0A+bIC/0mi4hd/S3eT0s3O91KOkE7ebOsBr8KFA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-lg border-0 rounded-lg">
+                    <div class="card-header">
+                        <h2 class="text-center mb-0">Update User</h2>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Edit" method="post">
+                            <input asp-for="ApplicationUser.Id" type="hidden" />
+
+                            <div class="row mb-3">
+                                <!-- Email -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ApplicationUser.Email" class="small mb-1">Email</label>
+                                        <input asp-for="ApplicationUser.Email" class="form-control py-4" autocomplete="username" placeholder="name@example.com" />
+                                        <span asp-validation-for="ApplicationUser.Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Name -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ApplicationUser.Name" class="small mb-1">Name</label>
+                                        <input asp-for="ApplicationUser.Name" class="form-control py-4" placeholder="Name" />
+                                        <span asp-validation-for="ApplicationUser.Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <!-- Phone Number -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ApplicationUser.PhoneNumber" class="small mb-1">Phone Number</label>
+                                        <input asp-for="ApplicationUser.PhoneNumber" class="form-control py-4" placeholder="Phone Number" />
+                                        <span asp-validation-for="ApplicationUser.PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Address -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ApplicationUser.Address" class="small mb-1">Address</label>
+                                        <input asp-for="ApplicationUser.Address" class="form-control py-4" placeholder="Address" />
+                                        <span asp-validation-for="ApplicationUser.Address" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <!-- City -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ApplicationUser.City" class="small mb-1">City</label>
+                                        <input asp-for="ApplicationUser.City" class="form-control py-4" placeholder="City" />
+                                        <span asp-validation-for="ApplicationUser.City" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- State -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ApplicationUser.State" class="small mb-1">State</label>
+                                        <input asp-for="ApplicationUser.State" class="form-control py-4" placeholder="State" />
+                                        <span asp-validation-for="ApplicationUser.State" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <!-- Pickup Address -->
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label asp-for="ApplicationUser.PickupAddress" class="small mb-1">Pickup Address</label>
+                                        <input asp-for="ApplicationUser.PickupAddress" class="form-control py-4" placeholder="Pickup Address" />
+                                        <span asp-validation-for="ApplicationUser.PickupAddress" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Role (Admin only) -->
+                                @if (User.IsInRole(SD.Role_Admin))
+                                {
+                                    <div class="col-md-12 mt-3">
+                                        <div class="form-group">
+                                            <label asp-for="ApplicationUser.Role" class="small mb-1">Role</label>
+                                            <select asp-for="ApplicationUser.Role" asp-items="@Model.RoleList" class="form-select">
+                                                <option disabled selected>-- Select Role --</option>
+                                            </select>
+                                            <span asp-validation-for="ApplicationUser.Role" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="submit" class="btn btn-primary rounded-pill">Update</button>
+                                <a class="btn btn-secondary rounded-pill" asp-controller="User" asp-action="Index">Back to List</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-8Q3Jt5g3s1z1M6V4ZIxSHcN4P6KD7uIhE5H3WENK1y8zqXn0A2QG8JtKj88Asb" crossorigin="anonymous"></script>
+</body>
+</html>

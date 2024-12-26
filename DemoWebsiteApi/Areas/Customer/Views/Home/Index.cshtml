@@ -1,0 +1,109 @@
+﻿@using DemoWebsiteApi.Utility
+@if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Customer) || User.IsInRole(SD.Role_SalePerson))
+{ 
+<div class="row">
+    <!-- Total Shipment Booked Card -->
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">
+                <h5>Total Shipment Booked</h5>
+                <p>@Model.TotalShipmentBooked</p>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#" onclick="toggleCardDetails('bookedDetails')">Click to view details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+            <div id="bookedDetails" class="card-details text-white" style="display:none;">
+                <ul>
+                    @foreach (var shipment in Model.BookedShipments)
+                    {
+                        <li>@shipment.TrackingNumber</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Shipment Arrived At Origin Card -->
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-warning text-white mb-4">
+            <div class="card-body">
+                <h5>Total Shipment Arrived At Origin</h5>
+                <p>@Model.TotalShipmentArrivedAtOrigin</p>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#" onclick="toggleCardDetails('arrivedAtOriginDetails')">Click to view details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+            <div id="arrivedAtOriginDetails" class="card-details text-white" style="display:none;">
+                <ul>
+                    @foreach (var shipment in Model.ArrivedAtOriginShipments)
+                    {
+                        <li>@shipment.TrackingNumber</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Shipment In Transit Card -->
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-success text-white mb-4">
+            <div class="card-body">
+                <h5>Total Shipment In Transit</h5>
+                <p>@Model.TotalShipmentInTransit</p>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#" onclick="toggleCardDetails('inTransitDetails')">Click to view details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+            <div id="inTransitDetails" class="card-details text-white" style="display:none;">
+                <ul>
+                    @foreach (var shipment in Model.InTransitShipments)
+                    {
+                        <li>@shipment.TrackingNumber</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Shipment Delivered Card -->
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-danger text-white mb-4">
+            <div class="card-body">
+                <h5>Total Shipment Delivered</h5>
+                <p>@Model.TotalShipmentDelivered</p>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#" onclick="toggleCardDetails('deliveredDetails')">Click to view details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+            <div id="deliveredDetails" class="card-details text-white" style="display:none;">
+                <ul>
+                    @foreach (var shipment in Model.DeliveredShipments)
+                    {
+                        <li>@shipment.TrackingNumber</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleCardDetails(id) {
+        var details = document.getElementById(id);
+        if (details.style.display === "none") {
+            details.style.display = "block";
+        } else {
+            details.style.display = "none";
+        }
+    }
+    </script>
+}
+
+else
+{
+ <h1>Dashboard</h1>   
+}

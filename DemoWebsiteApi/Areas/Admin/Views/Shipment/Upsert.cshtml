@@ -1,0 +1,135 @@
+﻿@using DemoWebsiteApi.Utility
+@model ShipmentVM
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@(Model.Shipment.ShipmentId == 0 ? "Create Shipment" : "Update Shipment")</title>
+</head>
+<body class="bg-light">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-md-10">
+                            <div class="card shadow-lg border-0 rounded-lg">
+                                <div class="card-header">
+                                    <h3 class="text-center font-weight-light my-4">
+                                        @(Model.Shipment.ShipmentId == 0 ? "Create Shipment" : "Update Shipment")
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                                    <form asp-action="Upsert" method="post">
+                                        <input asp-for="Shipment.ShipmentId" type="hidden" />
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <!-- Consignee Name -->
+                                                <div class="form-group">
+                                                    <label asp-for="Shipment.ConsigneeName" class="small mb-1">Consignee Name</label>
+                                                    <input type="text" class="form-control py-4" asp-for="Shipment.ConsigneeName" placeholder="Consignee Name" />
+                                                    <span asp-validation-for="Shipment.ConsigneeName" class="text-danger"></span>
+                                                </div>
+
+                                                <!-- Phone Number -->
+                                                <div class="form-group">
+                                                    <label asp-for="Shipment.PhoneNumber" class="small mb-1">Phone Number</label>
+                                                    <input type="text" class="form-control py-4" asp-for="Shipment.PhoneNumber" placeholder="Phone Number" />
+                                                    <span asp-validation-for="Shipment.PhoneNumber" class="text-danger"></span>
+                                                </div>
+
+                                                <!-- Address -->
+                                                <div class="form-group">
+                                                    <label asp-for="Shipment.Address" class="small mb-1">Address</label>
+                                                    <textarea class="form-control py-4" asp-for="Shipment.Address" placeholder="Enter Address"></textarea>
+                                                    <span asp-validation-for="Shipment.Address" class="text-danger"></span>
+                                                </div>
+
+                                                <!-- City -->
+                                                <div class="form-group">
+                                                    <label asp-for="Shipment.City" class="small mb-1">City</label>
+                                                    <input type="text" class="form-control py-4" asp-for="Shipment.City" placeholder="City" />
+                                                    <span asp-validation-for="Shipment.City" class="text-danger"></span>
+                                                </div>
+
+                                                <!-- COD Amount -->
+                                                <div class="form-group">
+                                                    <label asp-for="Shipment.CODAmount" class="small mb-1">COD Amount</label>
+                                                    <input type="number" class="form-control py-4" asp-for="Shipment.CODAmount" placeholder="COD Amount" />
+                                                    <span asp-validation-for="Shipment.CODAmount" class="text-danger"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <!-- Net Weight -->
+                                                <div class="form-group">
+                                                    <label asp-for="Shipment.Netweight" class="small mb-1">Net Weight</label>
+                                                    <input type="text" class="form-control py-4" asp-for="Shipment.Netweight" placeholder="Net Weight" />
+                                                    <span asp-validation-for="Shipment.Netweight" class="text-danger"></span>
+                                                </div>
+
+                                                <!-- Special Instructions -->
+                                                <div class="form-group">
+                                                    <label asp-for="Shipment.SpecialInstructions" class="small mb-1">Special Instructions</label>
+                                                    <textarea class="form-control py-4" asp-for="Shipment.SpecialInstructions" placeholder="Enter Special Instructions"></textarea>
+                                                    <span asp-validation-for="Shipment.SpecialInstructions" class="text-danger"></span>
+                                                </div>
+
+                                                @if (Model.Shipment.ShipmentId != 0)
+                                                {
+                                                    <!-- Shipment Status -->
+                                                    <div class="form-group">
+                                                        <label asp-for="Shipment.ShipmentStatus" class="small mb-1">Shipment Status</label>
+                                                        <select asp-for="Shipment.ShipmentStatus" class="form-control py-4" asp-items="Model.ShipmentStatus">
+                                                            <option disabled selected>-- Select Status --</option>
+                                                        </select>
+                                                        <span asp-validation-for="Shipment.ShipmentStatus" class="text-danger"></span>
+                                                    </div>
+                                                }
+
+                                                <!-- Sender -->
+                                                <div class="form-group">
+                                                    <label asp-for="Shipment.ApplicationUserId" class="small mb-1">Sender</label>
+                                                    @if (User.IsInRole(SD.Role_Customer) || User.IsInRole(SD.Role_SalePerson))
+                                                    {
+                                                        var currentUser = Model.UserList.FirstOrDefault(u => u.Value == Model.Shipment.ApplicationUserId);
+                                                        <input type="text" class="form-control py-4" readonly value="@currentUser?.Text" />
+                                                        <input type="hidden" asp-for="Shipment.ApplicationUserId" value="@Model.Shipment.ApplicationUserId" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <select asp-for="Shipment.ApplicationUserId" class="form-control py-4" asp-items="Model.UserList">
+                                                            <option disabled selected>-- Select Sender --</option>
+                                                        </select>
+                                                    }
+                                                    <span asp-validation-for="Shipment.ApplicationUserId" class="text-danger"></span>
+                                                </div>
+
+                                                <!-- Buttons -->
+                                                <div class="d-flex justify-content-between mt-4">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        @(Model.Shipment.ShipmentId == 0 ? "Create" : "Update")
+                                                    </button>
+                                                    <a class="btn btn-secondary" asp-controller="Shipment" asp-action="Index">Back to List</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+   
+</body>
+</html>
